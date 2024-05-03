@@ -1,15 +1,11 @@
-import { useMemo } from "react";
-
-export default function Header({ cart, removeFromCart, incleaseQuantity, decreaseQuantity, clearCart }) {
-  const cartTotal = useMemo(
-    () =>
-      cart.reduce(
-        (prevTotal, { quantity, price }) => prevTotal + quantity * price,
-        0
-      ),
-    [cart]
-  );
-
+export default function Header({
+  cart,
+  removeFromCart,
+  incleaseQuantity,
+  decreaseQuantity,
+  clearCart,
+  cartTotal,
+}) {
   return (
     <header className="py-5 header">
       <div className="container-xl">
@@ -52,11 +48,19 @@ export default function Header({ cart, removeFromCart, incleaseQuantity, decreas
                             <td>SRV</td>
                             <td className="fw-bold">${guitar.price}</td>
                             <td className="flex align-items-start gap-4">
-                              <button type="button" className="btn btn-dark" onClick={() => decreaseQuantity(guitar.id)}>
+                              <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={() => decreaseQuantity(guitar.id)}
+                              >
                                 -
                               </button>
                               {guitar.quantity}
-                              <button type="button" className="btn btn-dark" onClick={() => incleaseQuantity(guitar.id)}>
+                              <button
+                                type="button"
+                                className="btn btn-dark"
+                                onClick={() => incleaseQuantity(guitar.id)}
+                              >
                                 +
                               </button>
                             </td>
@@ -82,7 +86,10 @@ export default function Header({ cart, removeFromCart, incleaseQuantity, decreas
                   <p className="text-center">Cart is empty</p>
                 )}
 
-                <button className="btn btn-dark w-100 mt-3 p-2" onClick={clearCart}>
+                <button
+                  className="btn btn-dark w-100 mt-3 p-2"
+                  onClick={clearCart}
+                >
                   Empty Cart
                 </button>
               </div>
