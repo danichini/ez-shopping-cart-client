@@ -1,3 +1,4 @@
+import { db } from "../data/db";
 import { Guitar, CartItem } from "../types";
 
 export type CardAction =
@@ -7,15 +8,17 @@ export type CardAction =
   | { type: "decrease-quantity"; payload: { id: Guitar["id"] } }
   | { type: "clear-cart"; payload: { id: Guitar["id"] } };
 
-type typeState = {
+type CartState = {
+  data: Guitar[];
   cart: CartItem[];
 };
-export const initialState = {
+export const initialState: CartState = {
+  data: db,
   cart: [],
 };
 
 export function cartReducer(
-  state: typeState = initialState,
+  state: CartState = initialState,
   action: CardAction
 ) {
   if (action.type === "add-to-cart") {
