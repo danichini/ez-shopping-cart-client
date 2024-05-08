@@ -8,15 +8,24 @@ export type CartActions =
   | { type: "remove-from-cart"; payload: { id: Guitar["id"] } }
   | { type: "increase-quantity"; payload: { id: Guitar["id"] } }
   | { type: "decrease-quantity"; payload: { id: Guitar["id"] } }
-  | { type: "clear-cart" };
+  | { type: "clear-cart" }
+  | { type: "local-storage" }
 
 export type CartState = {
   guitar: Guitar[];
   cart: CartItem[];
 };
+
+const initialCart = (): CartItem[] => {
+  const localStorageCart = localStorage.getItem("cart");
+  console.log(localStorageCart);
+  
+  return localStorageCart ? JSON.parse(localStorageCart) : [];
+};
+
 export const initialState: CartState = {
   guitar: db,
-  cart: [],
+  cart: initialCart(),
 };
 
 export const cartReducer = (
@@ -89,5 +98,11 @@ export const cartReducer = (
       ...state,
       cart: [],
     };
+  }
+  if (action.type === 'local-storage') {
+    if (state && state.cart && state.cart.length) {
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    }
+    return {...state}
   }
 };

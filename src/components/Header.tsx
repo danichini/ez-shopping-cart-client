@@ -1,21 +1,15 @@
 import { useMemo } from "react";
-import type { CartItem, Guitar } from "../types";
+import type { CartItem } from "../types";
 import { CartActions } from "../reducers/cart-reducer";
 
 type HeaderProps = {
   cart: CartItem[];
-  incleaseQuantity: (id: Guitar["id"]) => void;
-  decreaseQuantity: (id: Guitar["id"]) => void;
-  clearCart: () => void;
   dispatch: React.Dispatch<CartActions>;
 };
 
 export default function Header({
   cart,
   dispatch,
-  incleaseQuantity,
-  decreaseQuantity,
-  clearCart,
 }: HeaderProps) {
   const cartTotal = useMemo(
     () =>
