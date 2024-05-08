@@ -13,13 +13,10 @@ function App() {
 
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  console.log(state);
-  
-
   return (
     <>
       <Header
-        cart={state.cart}
+        cart={state!.cart}
         incleaseQuantity={incleaseQuantity}
         decreaseQuantity={decreaseQuantity}
         clearCart={clearCart}
@@ -29,7 +26,7 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {state.guitar.map((guitar) => (
+          {state!.guitar.map((guitar) => (
             <Guitar key={guitar.id} guitar={guitar} dispatch={dispatch} />
           ))}
         </div>

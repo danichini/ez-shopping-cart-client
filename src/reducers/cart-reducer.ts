@@ -45,31 +45,43 @@ export const cartReducer = (
       const newItem: CartItem = { ...action.payload.guitar, quantity: 1 };
       updatedCart = [...cart, newItem];
     }
-    console.log("???????", updatedCart);
-
     return {
       ...state,
       cart: updatedCart,
     };
   }
   if (action.type === "remove-from-cart") {
-    const { cart } = state
-    const updatedCart = cart.filter((item) => action.payload.id !== item.id)
+    const { cart } = state;
+    const updatedCart = cart.filter((item) => action.payload.id !== item.id);
     return {
       ...state,
       cart: updatedCart,
     };
   }
   if (action.type === "increase-quantity") {
+    const { cart } = state;
+    const updatedCart = cart.map((item) => {
+      if (item.id === action.payload.id && item.quantity < MAX_ITEMS) {
+        return { ...item, quantity: item.quantity + 1 };
+      }
+      return item;
+    });
     return {
       ...state,
-      cart: [...state.cart, action.payload],
+      cart: updatedCart,
     };
   }
   if (action.type === "decrease-quantity") {
+    const { cart } = state;
+    const updatedCart = cart.map((item) => {
+      if (item.id === action.payload.id && item.quantity > 1) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
     return {
       ...state,
-      cart: [...state.cart, action.payload],
+      cart: updatedCart,
     };
   }
   if (action.type === "clear-cart") {
