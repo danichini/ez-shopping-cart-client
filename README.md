@@ -7,5 +7,6 @@ This simple template provides a minimal setup to get React working in Vite with 
 - TypeScript
 - useReducer
 - Custom Hooks (deprecated)
+- Local Storage
 
 [Live Project](https://ez-shopping-cart-chall.netlify.app/)
